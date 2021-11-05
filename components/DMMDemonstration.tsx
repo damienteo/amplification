@@ -79,17 +79,27 @@ const DMMDemonstration: React.FunctionComponent = (
   };
 
   const confirmSwap = () => {
-    const k = apples * bananas;
     let nextApples: number = 0;
     let nextBananas: number = 0;
     const nextIncomingAmt = parseFloat(incomingAmt);
 
+    const incomingTokenAmt = swapOrder[0] === Tokens.Apple ? apples : bananas;
+
+    const outgoingTokenAmt = swapOrder[1] === Tokens.Banana ? bananas : apples;
+
+    const outgoingAmt = getOutgoingAmtWithAmplification({
+      incomingTokenAmt,
+      outgoingTokenAmt,
+      incomingAmt,
+      amplification,
+    });
+
     if (swapOrder[0] === Tokens.Apple) {
       nextApples = apples + nextIncomingAmt;
-      nextBananas = k / nextApples;
+      nextBananas = bananas - outgoingAmt;
     } else {
       nextBananas = bananas + nextIncomingAmt;
-      nextApples = k / nextBananas;
+      nextApples = apples - outgoingAmt;
     }
 
     setApples(nextApples);
