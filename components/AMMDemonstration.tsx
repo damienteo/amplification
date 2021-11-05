@@ -44,6 +44,11 @@ const AMMDemonstration: React.FunctionComponent = (
     calcNextOutgoingAmt(incomingAmt);
   };
 
+  const resetTokens = () => {
+    setApples(5000);
+    setBananas(5000);
+  };
+
   const switchOrder = () => {
     const nextSwapOrder = [...swapOrder];
     const reversedSwapOrder = nextSwapOrder.reverse();
@@ -116,10 +121,11 @@ const AMMDemonstration: React.FunctionComponent = (
       </p>
       <div>
         <h3>APPLE-BANANA Liquidity Pool</h3>
-        <p>
+        <p className={styles.code}>
           There are currently {apples} Apples and {bananas} Bananas in the pool.
         </p>
         <h4>Swap</h4>
+        <button onClick={resetTokens}>Reset Tokens</button>
         <button onClick={switchOrder}>Switch</button>
         <p>From:</p>
         <input

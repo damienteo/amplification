@@ -11,7 +11,7 @@ const DMMDemonstration: React.FunctionComponent = (
 ) => {
   const [apples, setApples] = useState<number>(5000);
   const [bananas, setBananas] = useState<number>(5000);
-  const [amplification, setAmplification] = useState<string>("1");
+  const [amplification, setAmplification] = useState<string>("400");
 
   const [swapOrder, setSwapOrder] = useState<Tokens[]>([
     Tokens.Apple,
@@ -54,6 +54,11 @@ const DMMDemonstration: React.FunctionComponent = (
     setIncomingAmt(incomingAmt);
 
     calcNextOutgoingAmt(incomingAmt);
+  };
+
+  const resetTokens = () => {
+    setApples(5000);
+    setBananas(5000);
   };
 
   const switchOrder = () => {
@@ -165,10 +170,11 @@ const DMMDemonstration: React.FunctionComponent = (
       </p>
       <div>
         <h3>APPLE-BANANA Liquidity Pool</h3>
-        <p>
+        <p className={styles.code}>
           There are currently {apples} Apples and {bananas} Bananas in the pool.
         </p>
         <h4>Swap</h4>
+        <button onClick={resetTokens}>Reset Tokens</button>
         <button onClick={switchOrder}>Switch</button>
         <p>From:</p>
         <input
